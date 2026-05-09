@@ -1,0 +1,17 @@
+{
+  "mappings": {
+    "properties": {
+      "id":          { "type": "keyword" },
+      "name":        { "type": "text" },
+      "description": { "type": "text" },
+      "brand":       { "type": "keyword" },
+      "category":    { "type": "keyword" },
+      "price":       { "type": "float" },
+      "stock":       { "type": "integer" },
+      "click_count": { "type": "integer" },
+      "is_active":   { "type": "boolean" },
+      "created_at":  { "type": "date" },
+      "tags":        { "type": "keyword" }
+    }
+  }
+}
