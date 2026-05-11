@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commerce-search-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: commerce-search-app
+  template:
+    metadata:
+      labels:
+        app: commerce-search-app
+    spec:
+      containers:
+        - name: commerce-search-app
+          image: qasimalik/commerce-search-engine
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: commerce-config
+          env:
+            - name: OPENAI_API_KEY
+              value: "<API-KEY>"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: commerce-search-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: commerce-search-app
+  ports:
+    - port: 3000
+      targetPort: 3000
